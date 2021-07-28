@@ -9,6 +9,26 @@ import Foundation
 
 final class HttpController : ObservableObject{
     //@Published var accounts: [User]
+    func getAllMessages(client:String,username:String,completion: @escaping ([TextMessage])-> Void){
+        let url = URL(string:  "http://localhost:3000/getChat/\(client)/\(username)")
+        guard let requestUrl = url else {fatalError()}
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request){(data,response,error) in
+            //print(data[0])
+            print("09090909")
+            if let data = data{
+                if let messages = try? JSONDecoder().decode([TextMessage].self, from: data){
+                    print("BEEGGGIIIIN")
+                    print(messages)
+                    completion(messages)
+                }
+            }
+        }
+        task.resume();
+        
+        
+    }
     func fetchAccounts(completion: @escaping ([User]) -> Void)  {
         let url = URL(string: "http://localhost:3000/getUser/nmnmnm)")
         guard let requestUrl = url else {fatalError()}
@@ -18,13 +38,9 @@ final class HttpController : ObservableObject{
             print(data)
             print(response)
             if let error = error {
-                print ("ERROR")
+                print ("ERROR IN ERR")
                 return
             }
-            
-//            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-//                print("EUREKAAAAA:\n \(dataString)")
-//            }
             if let data = data{
                 
                print(data)

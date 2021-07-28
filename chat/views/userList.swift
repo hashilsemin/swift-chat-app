@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct userList: View {
+    var client: String
     @StateObject var settings = GameSettings()
     @ObservedObject var httpRequest = HttpController()
     let variable = HttpController()
@@ -17,7 +18,7 @@ struct userList: View {
 //               // continue your logic
 //
 //               self.user=accounts
-//               print("maghrib niskarik")
+//            
 //           }
 //       }
     //@EnvironmentObject private var User: User
@@ -28,19 +29,19 @@ struct userList: View {
         NavigationView{
             
                 List(user,id: \.username){ item in
-                    NavigationLink(destination: PlayerView(name: item.username)) {
+                    NavigationLink(destination: PlayerView(name: item.username,client:self.client)) {
                         Text(item.username)
+                            
                                     }
-                        
-                  
-                }.onAppear {
+  }.onAppear {
                     self.variable.fetchAccounts(){ (accounts) in
                         self.user=accounts
                 }
             }
+               
             
            
-            .navigationTitle("Stargram")
+            .navigationTitle("Stargram ⭐️")
             
         }
         
@@ -49,6 +50,20 @@ struct userList: View {
 
 struct userList_Previews: PreviewProvider {
     static var previews: some View {
-        userList()
+        userList(client: "nmn")
+        List{
+            Text("hi")
+                .frame(maxWidth: .infinity,alignment: .leading)
+                                           
+                                              .background(Color.blue)
+                                              .foregroundColor(Color.black)
+                                              .cornerRadius(4)
+                                              .frame(width: 70, height: 50, alignment: .center)
+            
+            Text("hi")
+               
+        }
+        .padding(.horizontal, 4)
+           
     }
 }

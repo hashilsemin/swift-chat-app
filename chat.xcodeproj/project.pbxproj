@@ -12,11 +12,15 @@
 		5A7E34CB26A9795A008BA42D /* loginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E34CA26A9795A008BA42D /* loginUser.swift */; };
 		5A7E34CE26A99058008BA42D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E34CD26A99058008BA42D /* User.swift */; };
 		5A7E34D226AB0984008BA42D /* userInbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E34D126AB0984008BA42D /* userInbox.swift */; };
+		5AB00C7B26B11E28003DAFE9 /* base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB00C7A26B11E28003DAFE9 /* base64.swift */; };
+		5AC37BC626AD3C4200A44075 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC37BC526AD3C4200A44075 /* SocketParser.swift */; };
 		5ACFA86C26A400FD0070FE47 /* viewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFA86B26A400FD0070FE47 /* viewController.swift */; };
 		5AE00AAB26A2F40E0014F4D3 /* chatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE00AAA26A2F40E0014F4D3 /* chatApp.swift */; };
 		5AE00AAD26A2F40E0014F4D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE00AAC26A2F40E0014F4D3 /* ContentView.swift */; };
 		5AE00AAF26A2F40F0014F4D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AE00AAE26A2F40F0014F4D3 /* Assets.xcassets */; };
 		5AE00AB226A2F40F0014F4D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AE00AB126A2F40F0014F4D3 /* Preview Assets.xcassets */; };
+		5AEDC4F226AC1BB400C3AA89 /* Textmessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDC4F126AC1BB400C3AA89 /* Textmessage.swift */; };
+		5AF4C69F26B04AE600A26CC9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF4C69E26B04AE600A26CC9 /* ImagePicker.swift */; };
 		A003649AFF371F748A68B78D /* Pods_chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE2798F8928FA4052C56D71 /* Pods_chat.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,12 +31,16 @@
 		5A7E34CA26A9795A008BA42D /* loginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginUser.swift; sourceTree = "<group>"; };
 		5A7E34CD26A99058008BA42D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5A7E34D126AB0984008BA42D /* userInbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInbox.swift; sourceTree = "<group>"; };
+		5AB00C7A26B11E28003DAFE9 /* base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = base64.swift; sourceTree = "<group>"; };
+		5AC37BC526AD3C4200A44075 /* SocketParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
 		5ACFA86B26A400FD0070FE47 /* viewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewController.swift; sourceTree = "<group>"; };
 		5AE00AA726A2F40E0014F4D3 /* chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE00AAA26A2F40E0014F4D3 /* chatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatApp.swift; sourceTree = "<group>"; };
 		5AE00AAC26A2F40E0014F4D3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5AE00AAE26A2F40F0014F4D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AE00AB126A2F40F0014F4D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5AEDC4F126AC1BB400C3AA89 /* Textmessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textmessage.swift; sourceTree = "<group>"; };
+		5AF4C69E26B04AE600A26CC9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7D9605B4A7605261E66CF3A7 /* Pods-chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat.release.xcconfig"; path = "Target Support Files/Pods-chat/Pods-chat.release.xcconfig"; sourceTree = "<group>"; };
 		9AE2798F8928FA4052C56D71 /* Pods_chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -63,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7E34C526A95A4E008BA42D /* socketConnection.swift */,
+				5AC37BC526AD3C4200A44075 /* SocketParser.swift */,
 			);
 			path = socket;
 			sourceTree = "<group>";
@@ -71,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				5A7E34CA26A9795A008BA42D /* loginUser.swift */,
+				5AF4C69E26B04AE600A26CC9 /* ImagePicker.swift */,
+				5AB00C7A26B11E28003DAFE9 /* base64.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -79,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7E34CD26A99058008BA42D /* User.swift */,
+				5AEDC4F126AC1BB400C3AA89 /* Textmessage.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -259,12 +271,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7E34CB26A9795A008BA42D /* loginUser.swift in Sources */,
+				5AC37BC626AD3C4200A44075 /* SocketParser.swift in Sources */,
 				5A7E34D226AB0984008BA42D /* userInbox.swift in Sources */,
 				5A7E34C826A95D90008BA42D /* userList.swift in Sources */,
+				5AB00C7B26B11E28003DAFE9 /* base64.swift in Sources */,
 				5ACFA86C26A400FD0070FE47 /* viewController.swift in Sources */,
 				5AE00AAD26A2F40E0014F4D3 /* ContentView.swift in Sources */,
 				5A7E34C626A95A4E008BA42D /* socketConnection.swift in Sources */,
+				5AF4C69F26B04AE600A26CC9 /* ImagePicker.swift in Sources */,
 				5AE00AAB26A2F40E0014F4D3 /* chatApp.swift in Sources */,
+				5AEDC4F226AC1BB400C3AA89 /* Textmessage.swift in Sources */,
 				5A7E34CE26A99058008BA42D /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
