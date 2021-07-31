@@ -31,12 +31,13 @@ struct userList: View {
                 List(user,id: \.username){ item in
                     NavigationLink(destination: PlayerView(name: item.username,client:self.client)) {
                         Text(item.username)
-                            
                                     }
   }.onAppear {
+      
                     self.variable.fetchAccounts(){ (accounts) in
                         self.user=accounts
                 }
+      
             }
                
             

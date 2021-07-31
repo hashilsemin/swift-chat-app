@@ -6,17 +6,22 @@
 //
 
 import SwiftUI
+import UIKit
+import SDWebImageSwiftUI
+
 
 struct PlayerView: View {
     @State private var image: Image?
     @State private var showingImagePicker = false
     @State private var inputImage:UIImage?
     @State var name: String
-    var client: String
+     var client: String
+    
     @State private var message: String = ""
     @ObservedObject var service = SocketService()
     @EnvironmentObject var settings: GameSettings
     @State private var txt = [TextMessage]()
+    
     @State private var isHidden  = false
     @ObservedObject var httpRequest = HttpController()
     //@State private var txt = [TextMessage]()
@@ -25,18 +30,54 @@ struct PlayerView: View {
         guard let  inputImage = inputImage else {
             return
         }
+       
 image = Image(uiImage: inputImage)
     }
+    func readImageFromDocs()->UIImage?{
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+
+        let filePath = URL(fileURLWithPath: documentsPath).appendingPathComponent("filename.png").path
+        if FileManager.default.fileExists(atPath: filePath) {
+            return UIImage(contentsOfFile: filePath)
+        } else {
+            return nil
+        }
+    }
+    let jam = 3175670394
+    //var imageView : UIImageView
     var body: some View {
-    
-        NavigationView{
-                List(txt,id: \.messageContent)
-            {item in
-                    Text(item.messageContent)
-                
-                    .foregroundColor(item.senderName==client ? .red : .blue)
-                }}
-            .navigationTitle("Stargram")
+   // imageView.sd_setImage(with: URL(string: "http://www.domain.com/path/to/image.jpg"), placeholderImage: UIImage(named: "placeholder.png"))
+//WebImage(url: URL(string: "http://localhost:3000/user-image/331993.jpg"))
+        //WebImage(url: URL(string: "http://localhost:3000/user-image/3175670394.jpg")).resizable().frame(width: 80, height: 80).clipShape(Circle())
+        //print("http://localhost:3000/user-image/.jpg")
+        let theImg = readImageFromDocs()
+        //Image(uiImage: UIImage(theImg)!)
+//        NavigationView{
+//                List(txt,id: \.messageContent)
+//            { item in
+//               // UIImage(data: item.image)
+//                if ((item.image) != nil) {
+//                    WebImage(url: URL(string: "http://localhost:3000/user-image/\(item.image ?? "Anonymous").jpg")).resizable().frame(width: 80, height: 80).clipShape(Circle())
+//                } else {
+//                    Text(item.messageContent)
+//                    .foregroundColor(item.senderName==client ? .red : .blue)
+//                }
+//
+//                //Text(item.image ?? "nil")
+//                //Text("http://localhost:3000/user-image/\(item.image ?? "Anonymous").jpg");
+//
+////                DispatchQueue.main.async {
+//
+////                         }
+//                }}
+//            .navigationTitle("Stargram")
+        ScrollView(.vertical ,showsIndicators: false){
+            VStack{
+                ForEach(txt,id: \.messageContent){i in
+                    chatCell(data: i,client : client)
+                }
+            }
+        }
         Spacer()
         
         HStack{
@@ -71,27 +112,25 @@ image = Image(uiImage: inputImage)
                 if (inputImage != nil) {
                     print("aaadu")
                     let imgstring =  convertImageToBase64(image: inputImage!)
-                    print(type(of: imgstring))
-                    service.sendImage(base64: imgstring ?? "nil")
+                    //print(imgstring)
+                    service.sendImage(base64: imgstring ?? "nil", sender:self.client,reciever:self.name)
+//                    inputImage = nil
+//                    image=nil
                     print("imagoli")
+                    
                     return
                 }
-                let sendMessage = TextMessage(messageContent: self.message, receiverName:self.name,senderName:self.client)
+                let sendMessage = TextMessage(messageContent: self.message, receiverName:self.name,senderName:self.client, image: nil)
                 self.txt += [sendMessage]
                 service.sendMessage(message: message, sender: self.client,reciever: name)
                 print("sendanghe")
             }
     }   .onAppear(perform: {
             httpRequest.getAllMessages(client: client,username: name){(data) in
-                print("LAKALKALLAKALAKALAKA")
-                print(data)
                 self.txt=data
             }
             service.getMessages(client1: client)
             { (txt1) in
-                print("NANANANANANANANANANA")
-                print(txt1)
-                //self.txt=txt1
                 self.txt += txt1
         }
         })
@@ -119,6 +158,37 @@ image = Image(uiImage: inputImage)
 //                          Image(systemName: "arrow.left")
 //                      })
     
+}
+struct chatCell : View {
+    var data : TextMessage
+    var client : String
+    var body: some View{
+        HStack{
+            if data.senderName==client {
+                Spacer()
+                Text(data.messageContent)
+                    .padding()
+                    .background(Color.blue)
+                    .clipShape(msgTail(myMsg: false))
+            }
+            else{
+                Text(data.messageContent)
+                    .padding()
+                    .background(Color(.red))
+                    .clipShape(msgTail(myMsg: true))
+                Spacer()
+            }
+        }
+        .padding(data.senderName==client ? .leading : .trailing, 55)
+        .padding(.vertical,10)
+    }
+}
+struct msgTail : Shape{
+    var myMsg : Bool
+    func path (in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft,.topRight,myMsg ? .bottomRight : .bottomLeft],cornerRadii: CGSize(width: 25, height: 25))
+        return Path(path.cgPath)
+    }
 }
 
 

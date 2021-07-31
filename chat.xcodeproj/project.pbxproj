@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A0E9CF626B2B1CC003F2060 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0E9CF526B2B1CC003F2060 /* ImageSaver.swift */; };
+		5A0E9CF926B30485003F2060 /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0E9CF826B30485003F2060 /* LoadImage.swift */; };
 		5A7E34C626A95A4E008BA42D /* socketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E34C526A95A4E008BA42D /* socketConnection.swift */; };
 		5A7E34C826A95D90008BA42D /* userList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E34C726A95D90008BA42D /* userList.swift */; };
 		5A7E34CB26A9795A008BA42D /* loginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E34CA26A9795A008BA42D /* loginUser.swift */; };
@@ -26,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		02BD450EA4FBC2039DF3C0F9 /* Pods-chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat.debug.xcconfig"; path = "Target Support Files/Pods-chat/Pods-chat.debug.xcconfig"; sourceTree = "<group>"; };
+		5A0E9CF526B2B1CC003F2060 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		5A0E9CF726B2B72D003F2060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5A0E9CF826B30485003F2060 /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
 		5A7E34C526A95A4E008BA42D /* socketConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = socketConnection.swift; sourceTree = "<group>"; };
 		5A7E34C726A95D90008BA42D /* userList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userList.swift; sourceTree = "<group>"; };
 		5A7E34CA26A9795A008BA42D /* loginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginUser.swift; sourceTree = "<group>"; };
@@ -82,6 +87,8 @@
 				5A7E34CA26A9795A008BA42D /* loginUser.swift */,
 				5AF4C69E26B04AE600A26CC9 /* ImagePicker.swift */,
 				5AB00C7A26B11E28003DAFE9 /* base64.swift */,
+				5A0E9CF526B2B1CC003F2060 /* ImageSaver.swift */,
+				5A0E9CF826B30485003F2060 /* LoadImage.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -116,6 +123,7 @@
 		5AE00AA926A2F40E0014F4D3 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				5A0E9CF726B2B72D003F2060 /* Info.plist */,
 				5A7E34CC26A99040008BA42D /* model */,
 				5A7E34C926A974B7008BA42D /* controller */,
 				5A7E34C426A959C8008BA42D /* socket */,
@@ -182,6 +190,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
@@ -277,9 +288,11 @@
 				5AB00C7B26B11E28003DAFE9 /* base64.swift in Sources */,
 				5ACFA86C26A400FD0070FE47 /* viewController.swift in Sources */,
 				5AE00AAD26A2F40E0014F4D3 /* ContentView.swift in Sources */,
+				5A0E9CF926B30485003F2060 /* LoadImage.swift in Sources */,
 				5A7E34C626A95A4E008BA42D /* socketConnection.swift in Sources */,
 				5AF4C69F26B04AE600A26CC9 /* ImagePicker.swift in Sources */,
 				5AE00AAB26A2F40E0014F4D3 /* chatApp.swift in Sources */,
+				5A0E9CF626B2B1CC003F2060 /* ImageSaver.swift in Sources */,
 				5AEDC4F226AC1BB400C3AA89 /* Textmessage.swift in Sources */,
 				5A7E34CE26A99058008BA42D /* User.swift in Sources */,
 			);
@@ -394,6 +407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"INFOPLIST_FILE[sdk=*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -416,6 +430,10 @@
 				DEVELOPMENT_TEAM = R8RHX9V8LP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = chat/Info.plist;
+				INFOPLIST_KEY_CFBundleExecutable = chat;
+				INFOPLIST_KEY_CFBundleName = chat;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -427,6 +445,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = hashil.com.chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -447,6 +466,11 @@
 				DEVELOPMENT_TEAM = R8RHX9V8LP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = chat/Info.plist;
+				"INFOPLIST_FILE[sdk=*]" = "";
+				INFOPLIST_KEY_CFBundleExecutable = chat;
+				INFOPLIST_KEY_CFBundleName = chat;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -458,6 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = hashil.com.chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

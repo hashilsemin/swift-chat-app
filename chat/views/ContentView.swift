@@ -17,7 +17,7 @@ struct ContentView: View {
     @ObservedObject var httpRequest = HttpController()
     @ObservedObject var service = SocketService()
     @State var username :String = ""
-   
+    @State private var showingAlert = false
     @State var showLoginView: Bool = false
     var body: some View {
         VStack{
@@ -29,17 +29,27 @@ struct ContentView: View {
                       } else {
                           HStack{
                               Text("Enter user name 🔥")
+                                  .alert(isPresented: self.$showingAlert) {
+                                              Alert(title: Text("Didn't your parents give a name to you?"))
+                                          }
                               TextField("Username",text: $username)
                                   .multilineTextAlignment(.center)
                           }.environmentObject(settings)
                           Button(action: {
-                              
+                              if username=="" {
+                                  showingAlert = true
+                                  return
+                              }
                             settings.username = username
                               httpRequest.registerUser(username: username)
                               self.showLoginView = true
-                          }){
+                          }
+                                 
+                          )
+                          {
                                   Text("Login")
                           }
+                          
                       }
                   }
         }
