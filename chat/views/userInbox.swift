@@ -18,6 +18,7 @@ struct PlayerView: View {
      var client: String
     
     @State private var message: String = ""
+    //@State private var randomInt: Int
     @ObservedObject var service = SocketService()
     @EnvironmentObject var settings: GameSettings
     @State private var txt = [TextMessage]()
@@ -35,7 +36,6 @@ image = Image(uiImage: inputImage)
     }
     func readImageFromDocs()->UIImage?{
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-
         let filePath = URL(fileURLWithPath: documentsPath).appendingPathComponent("filename.png").path
         if FileManager.default.fileExists(atPath: filePath) {
             return UIImage(contentsOfFile: filePath)
@@ -73,7 +73,7 @@ image = Image(uiImage: inputImage)
 //            .navigationTitle("Stargram")
         ScrollView(.vertical ,showsIndicators: false){
             VStack{
-                ForEach(txt,id: \.messageContent){i in
+                ForEach(txt,id: \.date){i in
                     chatCell(data: i,client : client)
                 }
             }
@@ -112,21 +112,46 @@ image = Image(uiImage: inputImage)
                 if (inputImage != nil) {
                     print("aaadu")
                     let imgstring =  convertImageToBase64(image: inputImage!)
-                    //print(imgstring)
-                    service.sendImage(base64: imgstring ?? "nil", sender:self.client,reciever:self.name)
-//                    inputImage = nil
-//                    image=nil
-                    print("imagoli")
-                    
+                    let RI = Int.random(in: 1..<50000000000)
+                    var randomInt1 = String(RI)
+                    service.sendImage(base64: imgstring ?? "nil", sender:self.client,reciever:self.name,randomInt1:randomInt1){() in
+                        print("imagoli")
+                        print(randomInt1)
+                        let date = Date()
+
+                        // Create Date Formatter
+                        let dateFormatter = DateFormatter()
+
+                        // Set Date Format
+                        dateFormatter.dateFormat = "YY, MMM d, HH:mm:ss"
+
+                        // Convert Date to String
+                        dateFormatter.string(from: date)
+                        let sendImgMessage = TextMessage(messageContent: "null", receiverName:self.name,senderName:self.client, image: randomInt1,date:   dateFormatter.string(from: date))
+                        //self.txt += [sendImgMessage]
+                    }
+                    inputImage = nil
                     return
+                  
                 }
-                let sendMessage = TextMessage(messageContent: self.message, receiverName:self.name,senderName:self.client, image: nil)
+                let date = Date()
+
+                // Create Date Formatter
+                let dateFormatter = DateFormatter()
+
+                // Set Date Format
+                dateFormatter.dateFormat = "YY, MMM d, HH:mm:ss"
+
+                // Convert Date to String
+                dateFormatter.string(from: date)
+                let sendMessage = TextMessage(messageContent: self.message, receiverName:self.name,senderName:self.client, image: nil, date:dateFormatter.string(from: date))
                 self.txt += [sendMessage]
                 service.sendMessage(message: message, sender: self.client,reciever: name)
                 print("sendanghe")
             }
     }   .onAppear(perform: {
             httpRequest.getAllMessages(client: client,username: name){(data) in
+                print("chaya")
                 self.txt=data
             }
             service.getMessages(client1: client)
@@ -164,19 +189,31 @@ struct chatCell : View {
     var client : String
     var body: some View{
         HStack{
+                        
+            
             if data.senderName==client {
                 Spacer()
-                Text(data.messageContent)
-                    .padding()
-                    .background(Color.blue)
-                    .clipShape(msgTail(myMsg: false))
-            }
+                if ((data.image) != nil) {
+                    //Text(data.image ?? "")
+                    WebImage(url: URL(string: "http://localhost:3000/user-image/\(data.image ?? "Anonymous").jpg")).resizable().frame(width: 140, height: 120).clipShape(RoundedRectangle(cornerRadius: 25))
+                } else{
+                    Text(data.messageContent)
+                        .padding()
+                        .background(Color.blue)
+                        .clipShape(msgTail(myMsg: false))
+}
+        }
             else{
-                Text(data.messageContent)
-                    .padding()
-                    .background(Color(.red))
-                    .clipShape(msgTail(myMsg: true))
-                Spacer()
+                if ((data.image) != nil) {
+                    WebImage(url: URL(string: "http://localhost:3000/user-image/\(data.image ?? "Anonymous").jpg")).resizable().frame(width: 80, height: 80).clipShape(Circle())
+                } else{
+                    Text(data.messageContent)
+                        .padding()
+                        .background(Color(.red))
+                        .clipShape(msgTail(myMsg: true))
+                    Spacer()
+                }
+            
             }
         }
         .padding(data.senderName==client ? .leading : .trailing, 55)
@@ -190,8 +227,6 @@ struct msgTail : Shape{
         return Path(path.cgPath)
     }
 }
-
-
 struct userInbox_Previews: PreviewProvider {
     static var previews: some View {
         PlayerView(name: "", client: "")

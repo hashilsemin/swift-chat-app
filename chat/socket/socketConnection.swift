@@ -30,12 +30,14 @@ final class SocketService: ObservableObject{
         print(" qwwQQQQQQQQQQ")
      
     }
-    func sendImage (base64:String,sender: String,reciever:String){
+    func sendImage (base64:String,sender: String,reciever:String,randomInt1:String,completion: @escaping () -> Void){
         let socket = manager.defaultSocket
         //print(type(of: base64))
         print("kookooo")
-        let randomInt = Int.random(in: 1..<50000000000)
-        socket.emit("sendImage",base64,sender,reciever,randomInt)
+        //let randomInt = Int.random(in: 1..<50000000000)
+        print(randomInt1)
+        socket.emit("sendImage",base64,sender,reciever,randomInt1)
+        completion()
     }
     func parseData(_ data: Array<Any>) -> [TextMessage]{
         do{
@@ -119,16 +121,19 @@ return
             messageDict["senderName"] = data[0] as! String
             messageDict["messageContent"] = data[1] as! String
    messageDict["receiverName"] = data[2] as! String
+            messageDict["date"] = data[3] as! String
             //completionHandler(messageDict)
    let senderName1 = messageDict["senderName"] as! String
    let messageContent1 = messageDict["messageContent"] as! String
    let receiverName1 = messageDict["receiverName"] as! String
             print(type(of: data[1]))
             print(data[1])
+            let date1 = messageDict["date"] as! String
             if data[1] as! String == "null" {
                 print("image vanneeeee")
                 messageDict["imageName"] = data[3] as! String
                 let imageName = messageDict["imageName"] as! String
+                let date1 = messageDict["date"] as! String
 //               let imgData =  convertBase64StringToImage(imageBase64String: data[3] as! String)
 //                print(type(of: imgData))
 //                func saveImage(image: UIImage) -> Bool {
@@ -158,14 +163,14 @@ return
 //                print(success)
                 
                 //completion
-                let message = TextMessage(messageContent: messageContent1, receiverName:receiverName1,senderName:senderName1, image:imageName )
+                let message = TextMessage(messageContent: messageContent1, receiverName:receiverName1,senderName:senderName1, image:imageName, date: date1 )
                          self.txt.append(message)
                 completion([message])
                 return
             }
            
             //let messageContent1 = messageDict["messageContent"] as! String
-            let message = TextMessage(messageContent: messageContent1, receiverName:receiverName1,senderName:senderName1, image: nil)
+            let message = TextMessage(messageContent: messageContent1, receiverName:receiverName1,senderName:senderName1, image: nil,date: date1)
                      //self.txt.append(message)
             completion([message])
             //print(self.parseData(data));

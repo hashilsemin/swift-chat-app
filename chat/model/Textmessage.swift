@@ -15,6 +15,7 @@ import UIKit
     let receiverName : String
     let senderName : String
     let image : String?
+     let date:String?
 }
 extension UIImage {
     var data: Data? {

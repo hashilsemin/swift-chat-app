@@ -14,6 +14,7 @@ final class HttpController : ObservableObject{
         guard let requestUrl = url else {fatalError()}
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
+       
         let task = URLSession.shared.dataTask(with: request){(data,response,error) in
             //print(data[0])
             print("09090909")
