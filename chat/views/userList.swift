@@ -25,7 +25,7 @@ struct userList: View {
 
    // @State private var user = [User]()
     var body: some View {
-        Text("lklkl")
+   
         NavigationView{
             
                 List(user,id: \.username){ item in

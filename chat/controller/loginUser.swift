@@ -10,7 +10,7 @@ import Foundation
 final class HttpController : ObservableObject{
     //@Published var accounts: [User]
     func getAllMessages(client:String,username:String,completion: @escaping ([TextMessage])-> Void){
-        let url = URL(string:  "http://localhost:3000/getChat/\(client)/\(username)")
+        let url = URL(string:  "http://192.168.0.105:3000/getChat/\(client)/\(username)")
         guard let requestUrl = url else {fatalError()}
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
@@ -31,7 +31,7 @@ final class HttpController : ObservableObject{
         
     }
     func fetchAccounts(completion: @escaping ([User]) -> Void)  {
-        let url = URL(string: "http://localhost:3000/getUser/nmnmnm)")
+        let url = URL(string: "http://192.168.0.105:3000/getUser/nmnmnm)")
         guard let requestUrl = url else {fatalError()}
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"

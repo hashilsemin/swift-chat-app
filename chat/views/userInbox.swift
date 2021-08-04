@@ -16,7 +16,7 @@ struct PlayerView: View {
     @State private var inputImage:UIImage?
     @State var name: String
      var client: String
-    
+    @State private var showDetails = false
     @State private var message: String = ""
     //@State private var randomInt: Int
     @ObservedObject var service = SocketService()
@@ -82,14 +82,22 @@ image = Image(uiImage: inputImage)
         
         HStack{
             VStack {
-                      image?
-                          .resizable()
-                          .scaledToFit()
-			
-                      Button("Select Image") {
-                          self.isHidden =  true
-                         self.showingImagePicker = true
-                      }
+               
+                if showDetails {
+                    image?
+                        .resizable()
+                        .scaledToFit()
+                           }
+                Button(action: {
+                    self.isHidden =  true
+                   self.showingImagePicker = true
+                    withAnimation {
+                                      showDetails.toggle()
+                                  }
+                }) {
+                        Image(systemName: "photo")
+            
+                };
                   }
                   .sheet(isPresented: $showingImagePicker ,onDismiss: loadImage) {
                       ImagePicker(image: self.$inputImage)
@@ -112,8 +120,12 @@ image = Image(uiImage: inputImage)
                 if (inputImage != nil) {
                     print("aaadu")
                     let imgstring =  convertImageToBase64(image: inputImage!)
+                
                     let RI = Int.random(in: 1..<50000000000)
                     var randomInt1 = String(RI)
+                    withAnimation {
+                                      showDetails.toggle()
+                                  }
                     service.sendImage(base64: imgstring ?? "nil", sender:self.client,reciever:self.name,randomInt1:randomInt1){() in
                         print("imagoli")
                         print(randomInt1)
@@ -204,16 +216,17 @@ struct chatCell : View {
 }
         }
             else{
+               
                 if ((data.image) != nil) {
-                    WebImage(url: URL(string: "http://localhost:3000/user-image/\(data.image ?? "Anonymous").jpg")).resizable().frame(width: 80, height: 80).clipShape(Circle())
+                    WebImage(url: URL(string: "http://localhost:3000/user-image/\(data.image ?? "Anonymous").jpg")).resizable().frame(width: 140, height: 120).clipShape(RoundedRectangle(cornerRadius: 25))
                 } else{
                     Text(data.messageContent)
                         .padding()
                         .background(Color(.red))
                         .clipShape(msgTail(myMsg: true))
-                    Spacer()
+                   
                 }
-            
+            Spacer()
             }
         }
         .padding(data.senderName==client ? .leading : .trailing, 55)
